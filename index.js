@@ -1,40 +1,84 @@
-const { Builder, By, until } = require('selenium-webdriver');
+const webdriver = require('selenium-webdriver');
+const { By, until } = webdriver;
 
 (async function myFunction() {
   // 创建一个driver实例
-  let driver = await new Builder().forBrowser('chrome').build();
+  const driver = new webdriver.Builder().forBrowser('chrome').build();
+
   try {
     // 跳转到页面
-    await driver.get('https://humanmade.jp/products/hm25te0714');
-    await new Promise(res => setTimeout(res, 1000));
+    await driver.get('https://humanmade.jp/products/hm25te0719');
 
-    //定位到購買按钮, 并点击
+    // 等待购买按钮加载完成并点击
+    await driver.wait(until.elementLocated(By.className('recommendation-modal__button')));
     await driver.findElement(By.className('recommendation-modal__button')).click();
-    await driver.findElement(By.id('nomalbtn')).click();
-    await new Promise(res => setTimeout(res, 2000));
 
+    // 选择颜色和尺码
+    const label = await driver.findElement(By.css('label[for="template--14627344875556__main-1-2"]'));
+    await label.click();
+
+    let selectSize = await driver.findElement(By.id('Option-template--14627344875556__main-1'));
+    let optionSize = await selectSize.findElement(By.css('option[value="XL"]'));
+    await selectSize.click();
+    await optionSize.click();
+
+
+    // 等待普通购买按钮加载完成并点击
+    await new Promise(res => setTimeout(res, 1500));
+    await driver.wait(until.elementLocated(By.id('nomalbtn')));
+    await driver.findElement(By.id('nomalbtn')).click();
+
+    // 等待加入购物车的按钮加载完成并点击
     await driver.wait(until.elementLocated(By.className('button button--primary button--full-width')));
     const button = await driver.findElement(By.className('button button--primary button--full-width'));
+    await new Promise(res => setTimeout(res, 1500));
     await button.click();
 
-    await new Promise(res => setTimeout(res, 1000));
     // 等待并填写邮箱和密码
     await driver.wait(until.elementLocated(By.id('CustomerEmail')));
     const emailField = await driver.findElement(By.id('CustomerEmail'));
-    await emailField.sendKeys('lawrencehei@Hotmail.com');
+    await emailField.sendKeys('anthonyissey@hotmail.com');
+    //await emailField.sendKeys('lawrencehei@hotmail.com');
+
+    await new Promise(res => setTimeout(res, 1500));
 
     await driver.wait(until.elementLocated(By.id('CustomerPassword')));
     const passwordField = await driver.findElement(By.id('CustomerPassword'));
-    await passwordField.sendKeys('QWEasd123');
+    await passwordField.sendKeys('Anthony6@');
+    //await passwordField.sendKeys('QWEasd123');
+    await new Promise(res => setTimeout(res, 1500));
 
     // 点击登录按钮
     await driver.findElement(By.css('#customer_login button')).click();
-
-
     console.log('登录成功！');
+
+    // 选择地址选项
+    await driver.wait(until.elementLocated(By.id('checkout_shipping_address_id')));
+    let selectElement = await driver.findElement(By.id('checkout_shipping_address_id'));
+    let optionElement = await selectElement.findElement(By.css('option[value="7152083042340"]'));
+    await selectElement.click();
+    await optionElement.click();
+
+    // 点击登录按钮
+    /*let paymentElement = await driver.findElement(By.id('continue_button_1'))
+    await paymentElement.click();
+    console.log('進入付款畫面！');*/
+
+    await new Promise(res => setTimeout(res, 1500));
+    let paymentElement = await driver.findElement(By.id('continue_button_1'))
+    await paymentElement.click();
+    console.log('進入付款畫面！');
+
+    // 繼續付款
+    await new Promise(res => setTimeout(res, 1500));
+    let paymentElement1 = await driver.findElement(By.id('continue_button'))
+    await paymentElement1.click();
+
+    
+
   } catch (error) {
-    console.error('登录失败：', error);
-  }  finally {
+    console.error('发生错误：', error);
+  } finally {
     // 关闭浏览器
     //await driver.quit();
   }
