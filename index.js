@@ -4,6 +4,7 @@ const { By, until } = webdriver;
 (async function myFunction() {
   // 创建一个driver实例
   const driver = new webdriver.Builder().forBrowser('chrome').build();
+  const startTime = Date.now(); // 记录开始时间
 
   try {
     // 跳转到页面
@@ -24,14 +25,14 @@ const { By, until } = webdriver;
 
 
     // 等待普通购买按钮加载完成并点击
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 1250));
     await driver.wait(until.elementLocated(By.id('nomalbtn')));
     await driver.findElement(By.id('nomalbtn')).click();
 
     // 等待加入购物车的按钮加载完成并点击
     await driver.wait(until.elementLocated(By.className('button button--primary button--full-width')));
     const button = await driver.findElement(By.className('button button--primary button--full-width'));
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 1250));
     await button.click();
 
     // 等待并填写邮箱和密码
@@ -40,13 +41,11 @@ const { By, until } = webdriver;
     await emailField.sendKeys('anthonyissey@hotmail.com');
     //await emailField.sendKeys('lawrencehei@hotmail.com');
 
-    await new Promise(res => setTimeout(res, 1500));
-
     await driver.wait(until.elementLocated(By.id('CustomerPassword')));
     const passwordField = await driver.findElement(By.id('CustomerPassword'));
     await passwordField.sendKeys('Anthony6@');
     //await passwordField.sendKeys('QWEasd123');
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 1250));
 
     // 点击登录按钮
     await driver.findElement(By.css('#customer_login button')).click();
@@ -64,21 +63,26 @@ const { By, until } = webdriver;
     await paymentElement.click();
     console.log('進入付款畫面！');*/
 
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 1250));
     let paymentElement = await driver.findElement(By.id('continue_button_1'))
     await paymentElement.click();
     console.log('進入付款畫面！');
 
     // 繼續付款
-    await new Promise(res => setTimeout(res, 1500));
+    await new Promise(res => setTimeout(res, 1250));
     let paymentElement1 = await driver.findElement(By.id('continue_button'))
     await paymentElement1.click();
 
-    
+
 
   } catch (error) {
     console.error('发生错误：', error);
   } finally {
+
+    const endTime = Date.now(); // 记录结束时间
+    const totalTime = (endTime - startTime) / 1000; // 计算总时间，单位为
+    console.log(`测试总共用时：${totalTime}秒`);
+
     // 关闭浏览器
     //await driver.quit();
   }
