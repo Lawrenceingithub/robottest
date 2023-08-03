@@ -8,14 +8,14 @@ const { By, until } = webdriver;
 
   try {
     // 跳转到页面
-    await driver.get('https://humanmade.jp/products/hm25te0719');
+    await driver.get('https://humanmade.jp/products/hm25te0722');
 
     // 等待购买按钮加载完成并点击
     await driver.wait(until.elementLocated(By.className('recommendation-modal__button')));
     await driver.findElement(By.className('recommendation-modal__button')).click();
 
     // 选择颜色和尺码
-    const label = await driver.findElement(By.css('label[for="template--14627344875556__main-1-2"]'));
+    const label = await driver.findElement(By.css('label[for="template--14627344875556__main-1-1"]'));
     await label.click();
 
     let selectSize = await driver.findElement(By.id('Option-template--14627344875556__main-1'));
