@@ -8,11 +8,7 @@ const { By, until } = webdriver;
 
   try {
     // 跳转到页面
-<<<<<<< HEAD
-    await driver.get('https://humanmade.jp/products/hm25te0722');
-=======
-    await driver.get('https://humanmade.jp/products/hm25te0728');
->>>>>>> 2fd260a010b35f1410a4fce83bdaa9921480c21d
+    await driver.get('https://humanmade.jp/products/hm25te0804');
 
     // 等待购买按钮加载完成并点击
     await driver.wait(until.elementLocated(By.className('recommendation-modal__button')));
@@ -42,13 +38,13 @@ const { By, until } = webdriver;
     // 等待并填写邮箱和密码
     await driver.wait(until.elementLocated(By.id('CustomerEmail')));
     const emailField = await driver.findElement(By.id('CustomerEmail'));
-    await emailField.sendKeys('anthonyissey@hotmail.com');
-    //await emailField.sendKeys('lawrencehei@hotmail.com');
+    //await emailField.sendKeys('anthonyissey@hotmail.com');
+    await emailField.sendKeys('lawrencehei@hotmail.com');
 
     await driver.wait(until.elementLocated(By.id('CustomerPassword')));
     const passwordField = await driver.findElement(By.id('CustomerPassword'));
-    await passwordField.sendKeys('Anthony6@');
-    //await passwordField.sendKeys('QWEasd123');
+    //await passwordField.sendKeys('Anthony6@');
+    await passwordField.sendKeys('QWEasd123');
     await new Promise(res => setTimeout(res, 1000));
 
     // 点击登录按钮
@@ -58,7 +54,7 @@ const { By, until } = webdriver;
     // 选择地址选项
     await driver.wait(until.elementLocated(By.id('checkout_shipping_address_id')));
     let selectElement = await driver.findElement(By.id('checkout_shipping_address_id'));
-    let optionElement = await selectElement.findElement(By.css('option[value="7152083042340"]'));
+    let optionElement = await selectElement.findElement(By.css('option[value="7632364109860"]'));
     await selectElement.click();
     await optionElement.click();
 
