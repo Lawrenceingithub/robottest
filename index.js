@@ -8,7 +8,7 @@ const { By, until } = webdriver;
 
   try {
     // 跳转到页面
-    await driver.get('https://humanmade.jp/products/hm25te0719');
+    await driver.get('https://humanmade.jp/products/hm25te0728');
 
     // 等待购买按钮加载完成并点击
     await driver.wait(until.elementLocated(By.className('recommendation-modal__button')));
@@ -25,7 +25,7 @@ const { By, until } = webdriver;
 
 
     // 等待普通购买按钮加载完成并点击
-    await new Promise(res => setTimeout(res, 1250));
+    await new Promise(res => setTimeout(res, 1300));
     await driver.wait(until.elementLocated(By.id('nomalbtn')));
     await driver.findElement(By.id('nomalbtn')).click();
 
@@ -45,7 +45,7 @@ const { By, until } = webdriver;
     const passwordField = await driver.findElement(By.id('CustomerPassword'));
     await passwordField.sendKeys('Anthony6@');
     //await passwordField.sendKeys('QWEasd123');
-    await new Promise(res => setTimeout(res, 1250));
+    await new Promise(res => setTimeout(res, 1000));
 
     // 点击登录按钮
     await driver.findElement(By.css('#customer_login button')).click();
@@ -58,12 +58,7 @@ const { By, until } = webdriver;
     await selectElement.click();
     await optionElement.click();
 
-    // 点击登录按钮
-    /*let paymentElement = await driver.findElement(By.id('continue_button_1'))
-    await paymentElement.click();
-    console.log('進入付款畫面！');*/
-
-    await new Promise(res => setTimeout(res, 1250));
+    await new Promise(res => setTimeout(res, 1000));
     let paymentElement = await driver.findElement(By.id('continue_button_1'))
     await paymentElement.click();
     console.log('進入付款畫面！');
@@ -77,6 +72,7 @@ const { By, until } = webdriver;
 
   } catch (error) {
     console.error('发生错误：', error);
+    //await driver.navigate().refresh();
   } finally {
 
     const endTime = Date.now(); // 记录结束时间
