@@ -5,13 +5,6 @@
   <title>OCR Demo</title>
 </head>
 <body>
-    <div id="match_lineups"></div>
-    <script language="javascript">document.getElementById('match_lineups').innerHTML="<iframe src='https://www.aiscore.com/zht/match-los-angeles-galaxy-club-leon/vrqwni9y2dxa4qn/lineups?isplugin=true'  height='1344' width='100%' scrolling='auto' border='0' frameborder='0'></iframe>";</script>
-    <style>body{margin:0;padding:0}</style>
-  <canvas id="canvas"></canvas>
-  <input type="file" onchange="loadImage(event)">
-  <div id="result"></div>
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.4/dist/tesseract.min.js"></script>
   <script>
     function loadImage(event) {
       var input = event.target;
