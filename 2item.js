@@ -8,11 +8,7 @@ const { By, until } = webdriver;
 
   try {
     // 跳转到页面
-<<<<<<< HEAD:index.js
     await driver.get('https://humanmade.jp/products/hm25cs046?variant=40710204555300');
-=======
-    await driver.get('https://humanmade.jp/products/hm25te0804');
->>>>>>> 7f9ec18db967acdd5e72b268784e20f46b696c18:2item.js
 
     // 点击
     await driver.wait(until.elementLocated(By.className('recommendation-modal__button')));
