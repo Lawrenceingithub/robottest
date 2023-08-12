@@ -1,0 +1,38 @@
+<<<<<<< HEAD:test.html
+=======
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OCR Demo</title>
+</head>
+<body>
+  <h1>Hello World</h1>
+  <script>
+    function loadImage(event) {
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = function() {
+        var dataURL = reader.result;
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var img = new Image();
+        img.onload = function() {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+          Tesseract.recognize(canvas.toDataURL())
+            .then(function(result) {
+              var text = result.text;
+              document.getElementById('result').innerHTML = '<p>OCR Result: ' + text + '</p>';
+              console.log(text);
+            });
+        };
+        img.src = dataURL;
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  </script>
+</body>
+</html>
+>>>>>>> 7f9ec18db967acdd5e72b268784e20f46b696c18:index.html
